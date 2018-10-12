@@ -68,6 +68,9 @@ const UserSchema = mongoose.Schema({
   verfied: {
     type: Boolean,
     default: false
+  },
+  verficationHash: {
+    type: String
   }
 });
 
@@ -147,6 +150,19 @@ UserSchema.statics.getUserByUserName = function(userName) {
       });
     return Promise.resolve(user);
   });
+};
+
+UserSchema.statics.validateUser = function(hash) {
+  User = this;
+  return User.findOneAndUpdate(
+    { verficationHash: hash },
+    {
+      $set: {
+        verfied: true,
+        verficationHash: ""
+      }
+    }
+  );
 };
 
 module.exports = mongoose.model("User", UserSchema);
