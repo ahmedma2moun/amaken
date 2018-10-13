@@ -38,8 +38,13 @@ router.post("/signup", (req, res) => {
         var mailOptions = {
           from: "Dont Replay <amakenapplication@gmail.com>",
           to: body.email,
-          subject: "Sending Email using Node.js",
-          html: `<a href="http://localhost:4200/validate;hash=${user.verficationHash}">Verifiy<a>`
+          subject: "One more step",
+          html: `
+          <p>Hello ${user.userName}<p>
+          <p>Please click on the bellow link to complete your registration<p>
+          <a href="http://localhost:4200/validate;hash=${user.verficationHash}">Verifiy<a>
+          <p>Regards<p>
+          `
         };
         transporter.sendMail(mailOptions, function(error, info) {});
         res.json(_.pick(user, ["_id", "userName", "email"]));
