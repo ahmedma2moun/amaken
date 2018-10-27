@@ -4,7 +4,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongose = require("mongoose");
 const userRouters = require("./routes/user");
-
+//test from mac
 mongose
   .connect(process.env.MONGODB_URI)
   .then(() => console.log("Connecte to data base"))
